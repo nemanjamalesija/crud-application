@@ -17,7 +17,7 @@ const personSchema = new mongoose.Schema({
   adress: String,
   createdDate: {
     type: Date,
-    default: Date.now(),
+    default: new Date().toISOString(),
   },
 });
 

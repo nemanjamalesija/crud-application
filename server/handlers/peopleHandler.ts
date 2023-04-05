@@ -4,8 +4,6 @@ import { Request, Response } from 'express';
 const getPeopleHandler = async (req: Request, res: Response) => {
   try {
     const allPeople = await Person.find();
-    console.log(allPeople);
-
     return res.status(200).json({
       status: 'success',
       results: allPeople.length,
@@ -58,11 +56,9 @@ const updatePersonHandler = async (req: Request, res: Response) => {
     const contentToUpdate = { ...req.body };
     const idToUpdate = req.params.id;
 
-    const updatedPerson = await Person.findByIdAndUpdate(
-      idToUpdate,
-      contentToUpdate,
-      { overwrite: true }
-    );
+    const updatedPerson = await Person.findByIdAndUpdate(idToUpdate, contentToUpdate, {
+      overwrite: true,
+    });
 
     res.status(201).json({
       status: 'sucess',
