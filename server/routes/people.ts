@@ -1,8 +1,8 @@
 import express from 'express';
-import { getPeopleHandler } from '../handlers/peopleHandler';
+import { getPeopleHandler, postPersonHandler } from '../handlers/peopleHandler';
 
 const router = express.Router();
 
-router.route('/').get(getPeopleHandler);
+router.route('/').get(getPeopleHandler).post(postPersonHandler);
 
 export { router };
