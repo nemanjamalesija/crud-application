@@ -43,7 +43,7 @@ const postPersonHandler = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       status: 'success',
-      data: { person: newPerson },
+      data: { newPerson },
     });
   } catch (error) {
     return res.json({
@@ -51,6 +51,24 @@ const postPersonHandler = async (req: Request, res: Response) => {
       message: 'Could not create the person',
     });
   }
+};
+
+const updatePersonHandler = async (req: Request, res: Response) => {
+  try {
+    const contentToUpdate = { ...req.body };
+    const idToUpdate = req.params.id;
+
+    const updatedPerson = await Person.findByIdAndUpdate(
+      idToUpdate,
+      contentToUpdate,
+      { overwrite: true }
+    );
+
+    res.status(201).json({
+      status: 'sucess',
+      data: { updatedPerson },
+    });
+  } catch (error) {}
 };
 
 const deletePersonHandler = async (req: Request, res: Response) => {
@@ -75,4 +93,5 @@ export {
   postPersonHandler,
   getSinglePersonHandler,
   deletePersonHandler,
+  updatePersonHandler,
 };
