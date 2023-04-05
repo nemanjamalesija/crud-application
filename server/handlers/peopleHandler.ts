@@ -20,6 +20,23 @@ const getPeopleHandler = async (req: Request, res: Response) => {
   }
 };
 
+const getSinglePersonHandler = async (req: Request, res: Response) => {
+  try {
+    const currentPersonId = req.params.id;
+    const currentPerson = await Person.findById(currentPersonId);
+    return res.status(201).json({
+      status: 'sucess',
+      data: { person: currentPerson },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.json(404).json({
+      status: 'fail',
+      message: 'Could not get the person',
+    });
+  }
+};
+
 const postPersonHandler = async (req: Request, res: Response) => {
   try {
     const newPerson = await Person.create(req.body);
@@ -29,7 +46,6 @@ const postPersonHandler = async (req: Request, res: Response) => {
       data: { person: newPerson },
     });
   } catch (error) {
-    console.log(error);
     return res.json({
       status: 'fail',
       message: 'Could not create the person',
@@ -37,4 +53,4 @@ const postPersonHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { getPeopleHandler, postPersonHandler };
+export { getPeopleHandler, postPersonHandler, getSinglePersonHandler };
