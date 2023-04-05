@@ -53,4 +53,26 @@ const postPersonHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { getPeopleHandler, postPersonHandler, getSinglePersonHandler };
+const deletePersonHandler = async (req: Request, res: Response) => {
+  try {
+    const currentPersonId = req.params.id;
+    await Person.findByIdAndDelete(currentPersonId);
+    res.status(200).json({
+      status: 'sucess',
+      message: 'Person has been deleted',
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      status: 'fail',
+      message: "Couldn't delete the person",
+    });
+  }
+};
+
+export {
+  getPeopleHandler,
+  postPersonHandler,
+  getSinglePersonHandler,
+  deletePersonHandler,
+};
