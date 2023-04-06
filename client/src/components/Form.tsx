@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../types/rootState';
 import { STORE_PERSON_INFO } from '../actions/personActions';
+import { personType } from '../types/personType';
+import axios from 'axios';
 
 const Form = () => {
   const newPerson = useSelector((state: RootState) => state.personReducer.newPerson);
@@ -14,6 +16,19 @@ const Form = () => {
     const value = e.currentTarget.value;
 
     dispatch(STORE_PERSON_INFO(key, value));
+  };
+
+  const createNewPersonHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, newPerson: personType) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('http://127.0.0.1:3000/api/people/', newPerson);
+      console.log(newPerson);
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -38,6 +53,9 @@ const Form = () => {
         <label>Adress</label>
         <input name='adress' type='text' value={adress} onChange={storeNewPersonHandler} />
       </div>
+      <button className='btn-form' type='submit' onClick={(e) => createNewPersonHandler(e, newPerson)}>
+        Submit
+      </button>
     </form>
   );
 };

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { STORE_INITIAL_PEOPLE } from './actions/peopleActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './types/rootState';
+import { nanoid } from '@reduxjs/toolkit';
 import Person from './components/Person';
 import Form from './components/Form';
 
@@ -32,7 +33,7 @@ function App() {
       <Form />
       <div className='people-container'>
         {people.map((person) => {
-          return <Person key={person._id} {...person} />;
+          return <Person key={person._id || nanoid()} {...person} />;
         })}
       </div>
     </div>
