@@ -10,6 +10,3 @@ export type personType = {
 
 export type peopleType = personType[];
 
-export type stateType = {
-  people: peopleType;
-};

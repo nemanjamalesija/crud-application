@@ -6,3 +6,5 @@ export const STORE_INITIAL_PEOPLE = createAction('STORE_INITIAL_PEOPLE', (people
     payload: people,
   };
 });
+
+export type ACTIONS = ReturnType<typeof STORE_INITIAL_PEOPLE>;
