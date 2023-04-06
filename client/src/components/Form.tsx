@@ -5,6 +5,7 @@ import { STORE_PERSON_INFO } from '../actions/personActions';
 import { personType } from '../types/personType';
 import { ADD_NEW_PERSON } from '../actions/peopleActions';
 import axios from 'axios';
+import { apiURL } from '../constants/apiURL';
 
 const Form = () => {
   const newPerson = useSelector((state: RootState) => state.personReducer.newPerson);
@@ -23,7 +24,7 @@ const Form = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:3000/api/people/', newPerson);
+      const response = await axios.post(apiURL, newPerson);
       const {
         data: {
           data: { newPerson: newPersonServerResponse },

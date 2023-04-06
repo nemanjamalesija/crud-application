@@ -14,4 +14,8 @@ export const ADD_NEW_PERSON = createAction('ADD_NEW_PERSON', (newPerson: personT
   };
 });
 
+export const DELETE_PERSON = createAction('DELETE_PERSON', (id: string) => {
+  return { payload: id };
+});
+
 export type peopleActions = ReturnType<typeof STORE_INITIAL_PEOPLE> | ReturnType<typeof ADD_NEW_PERSON>;

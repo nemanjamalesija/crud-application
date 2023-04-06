@@ -6,6 +6,7 @@ import { RootState } from './types/rootState';
 import { nanoid } from '@reduxjs/toolkit';
 import Person from './components/Person';
 import Form from './components/Form';
+import { apiURL } from './constants/apiURL';
 
 function App() {
   const people = useSelector((state: RootState) => state.peopleReducer.people);
@@ -13,7 +14,7 @@ function App() {
 
   useEffect(() => {
     const getAllUsers = async () => {
-      const response = await axios('http://127.0.0.1:3000/api/people/');
+      const response = await axios(apiURL);
       const {
         data: {
           data: { people },
