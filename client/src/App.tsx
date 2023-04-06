@@ -4,6 +4,7 @@ import { initialState } from './constants/initialState';
 import { peopleReducer } from './reducers/peopleReducer';
 import { STORE_INITIAL_PEOPLE } from './actions/actions';
 import Person from './components/Person';
+import Form from './components/Form';
 
 function App() {
   const [state, dispatch] = useReducer(peopleReducer, initialState);
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className='App'>
+      <Form />
       <div className='people-container'>
         {state.people.map((person) => {
           return <Person key={person._id} {...person} />;
