@@ -1,18 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { initialState } from '../constants/initialState';
+import { peopleState } from '../states/peopleState';
 import { ADD_NEW_PERSON, DELETE_PERSON, STORE_INITIAL_PEOPLE } from '../actions/peopleActions';
 
-export const peopleReducer = createReducer(initialState, (builder) => {
+export const peopleReducer = createReducer(peopleState, (builder) => {
   builder.addCase(STORE_INITIAL_PEOPLE, (state, action) => {
     const { payload: peopleAPI } = action;
 
-    return { ...state, people: peopleAPI };
+    return { people: peopleAPI };
   });
 
   builder.addCase(ADD_NEW_PERSON, (state, action) => {
     const { payload: newPerson } = action;
 
-    return { ...state, people: [...state.people, newPerson] };
+    return { people: [...state.people, newPerson] };
   });
 
   builder.addCase(DELETE_PERSON, (state, action) => {
@@ -20,6 +20,6 @@ export const peopleReducer = createReducer(initialState, (builder) => {
 
     const newPeople = state.people.filter((p) => p._id !== clickedPersonID);
 
-    return { ...state, people: newPeople };
+    return { people: newPeople };
   });
 });
