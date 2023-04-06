@@ -1,5 +1,5 @@
 import React from 'react';
-import { personType } from '../types/peopleTypes';
+import { personType } from '../types/personType';
 
 const Person = ({ firstName, lastName, age, city, adress, date, _id }: personType) => {
   return (

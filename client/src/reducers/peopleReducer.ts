@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { STORE_INITIAL_PEOPLE } from '../actions/actions';
+import { STORE_INITIAL_PEOPLE } from '../actions/peopleActions';
 import { initialState } from '../constants/initialState';
 
 export const peopleReducer = createReducer(initialState, (builder) => {

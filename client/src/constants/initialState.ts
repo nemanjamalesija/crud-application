@@ -1,17 +1,16 @@
-import { personType } from '../types/peopleTypes';
-import { stateType } from '../types/stateType';
+import { personType } from '../types/personType';
 
-const person = {
+const person: personType = {
   _id: '',
   firstName: '',
   lastName: '',
   age: 0,
-  date: new Date().toISOString(),
   city: '',
   adress: '',
+  date: '',
 };
 
-export const initialState: stateType = {
+export const initialState = {
   people: [person],
   currentPerson: person,
 };

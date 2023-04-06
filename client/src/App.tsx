@@ -1,15 +1,14 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { STORE_INITIAL_PEOPLE } from './actions/actions';
+import { STORE_INITIAL_PEOPLE } from './actions/peopleActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from './types/rootState';
 import Person from './components/Person';
 import Form from './components/Form';
-import { useAppContext } from './context';
 
 function App() {
-  const {
-    state: { people },
-    dispatch,
-  } = useAppContext();
+  const people = useSelector((state: RootState) => state.peopleReducer.people);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getAllUsers = async () => {
