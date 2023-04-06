@@ -4,6 +4,7 @@ import { RootState } from '../types/rootState';
 import { STORE_PERSON_INFO } from '../actions/personActions';
 import { personType } from '../types/personType';
 import axios from 'axios';
+import { ADD_NEW_PERSON } from '../actions/peopleActions';
 
 const Form = () => {
   const newPerson = useSelector((state: RootState) => state.personReducer.newPerson);
@@ -23,8 +24,9 @@ const Form = () => {
 
     try {
       const response = await axios.post('http://127.0.0.1:3000/api/people/', newPerson);
-      console.log(newPerson);
+      dispatch(ADD_NEW_PERSON(newPerson));
 
+      console.log(newPerson);
       console.log(response);
     } catch (error) {
       console.log(error);
