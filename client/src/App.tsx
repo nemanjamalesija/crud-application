@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect } from 'react';
-import { ADD_NEW_PERSON, STORE_INITIAL_PEOPLE } from './actions/peopleActions';
+import { STORE_INITIAL_PEOPLE } from './actions/peopleActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './types/rootState';
 import { nanoid } from '@reduxjs/toolkit';

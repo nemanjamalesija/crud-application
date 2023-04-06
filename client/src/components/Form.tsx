@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../types/rootState';
 import { STORE_PERSON_INFO } from '../actions/personActions';
 import { personType } from '../types/personType';
-import axios from 'axios';
 import { ADD_NEW_PERSON } from '../actions/peopleActions';
+import axios from 'axios';
 
 const Form = () => {
   const newPerson = useSelector((state: RootState) => state.personReducer.newPerson);
@@ -24,10 +24,13 @@ const Form = () => {
 
     try {
       const response = await axios.post('http://127.0.0.1:3000/api/people/', newPerson);
-      dispatch(ADD_NEW_PERSON(newPerson));
+      const {
+        data: {
+          data: { newPerson: newPersonServerResponse },
+        },
+      } = response;
 
-      console.log(newPerson);
-      console.log(response);
+      dispatch(ADD_NEW_PERSON(newPersonServerResponse));
     } catch (error) {
       console.log(error);
     }
