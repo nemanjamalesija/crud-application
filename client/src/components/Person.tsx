@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { personType } from '../types/personType';
 import { apiURL } from '../constants/apiURL';
 import { useDispatch } from 'react-redux';
 import { DELETE_PERSON } from '../actions/peopleActions';
+import axios from 'axios';
 
 const Person = ({ firstName, lastName, age, city, adress, date, _id }: personType) => {
   const dispatch = useDispatch();

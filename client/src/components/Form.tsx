@@ -4,8 +4,8 @@ import { RootState } from '../types/rootState';
 import { STORE_PERSON_INFO } from '../actions/personActions';
 import { personType } from '../types/personType';
 import { ADD_NEW_PERSON } from '../actions/peopleActions';
-import axios from 'axios';
 import { apiURL } from '../constants/apiURL';
+import axios from 'axios';
 
 const Form = () => {
   const newPerson = useSelector((state: RootState) => state.personReducer.newPerson);

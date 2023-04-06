@@ -4,21 +4,21 @@ import { ADD_NEW_PERSON, DELETE_PERSON, STORE_INITIAL_PEOPLE } from '../actions/
 
 export const peopleReducer = createReducer(initialState, (builder) => {
   builder.addCase(STORE_INITIAL_PEOPLE, (state, action) => {
-    const { payload } = action;
+    const { payload: newPeopleAPI } = action;
 
-    return { ...state, people: payload };
+    return { ...state, people: newPeopleAPI };
   });
 
   builder.addCase(ADD_NEW_PERSON, (state, action) => {
-    const { payload } = action;
+    const { payload: newPerson } = action;
 
-    return { ...state, people: [...state.people, payload] };
+    return { ...state, people: [...state.people, newPerson] };
   });
 
   builder.addCase(DELETE_PERSON, (state, action) => {
-    const { payload } = action;
+    const { payload: clickedPersonID } = action;
 
-    const newPeople = state.people.filter((p) => p._id !== payload);
+    const newPeople = state.people.filter((p) => p._id !== clickedPersonID);
 
     return { ...state, people: newPeople };
   });
