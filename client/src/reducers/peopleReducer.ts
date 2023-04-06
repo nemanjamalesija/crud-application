@@ -4,9 +4,9 @@ import { ADD_NEW_PERSON, DELETE_PERSON, STORE_INITIAL_PEOPLE } from '../actions/
 
 export const peopleReducer = createReducer(initialState, (builder) => {
   builder.addCase(STORE_INITIAL_PEOPLE, (state, action) => {
-    const { payload: newPeopleAPI } = action;
+    const { payload: peopleAPI } = action;
 
-    return { ...state, people: newPeopleAPI };
+    return { ...state, people: peopleAPI };
   });
 
   builder.addCase(ADD_NEW_PERSON, (state, action) => {
