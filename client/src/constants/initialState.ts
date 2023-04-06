@@ -12,5 +12,5 @@ const person: personType = {
 
 export const initialState = {
   people: [person],
-  currentPerson: person,
+  newPerson: person,
 };
