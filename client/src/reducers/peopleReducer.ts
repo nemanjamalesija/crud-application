@@ -6,20 +6,20 @@ export const peopleReducer = createReducer(peopleState, (builder) => {
   builder.addCase(STORE_INITIAL_PEOPLE, (state, action) => {
     const { payload: peopleAPI } = action;
 
-    return { people: peopleAPI };
+    return peopleAPI;
   });
 
   builder.addCase(ADD_NEW_PERSON, (state, action) => {
     const { payload: newPerson } = action;
 
-    return { people: [...state.people, newPerson] };
+    return [...state, newPerson];
   });
 
   builder.addCase(DELETE_PERSON, (state, action) => {
     const { payload: clickedPersonID } = action;
 
-    const newPeople = state.people.filter((p) => p._id !== clickedPersonID);
+    const newPeople = state.filter((p) => p._id !== clickedPersonID);
 
-    return { people: newPeople };
+    return newPeople;
   });
 });

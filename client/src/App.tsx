@@ -9,7 +9,7 @@ import Form from './components/Form';
 import { apiURL } from './constants/apiURL';
 
 function App() {
-  const people = useSelector((state: RootState) => state.peopleReducer.people);
+  const people = useSelector((state: RootState) => state.peopleReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {

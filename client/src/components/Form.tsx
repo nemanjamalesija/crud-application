@@ -8,7 +8,7 @@ import { apiURL } from '../constants/apiURL';
 import axios from 'axios';
 
 const Form = () => {
-  const newPerson = useSelector((state: RootState) => state.personReducer.newPerson);
+  const newPerson = useSelector((state: RootState) => state.personReducer);
   const dispatch = useDispatch();
 
   const { firstName, lastName, age, city, adress } = newPerson;
