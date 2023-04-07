@@ -15,8 +15,17 @@ const peopleActions = {
   DELETE_PERSON: createAction('DELETE_PERSON', (clickedPersonID: string) => {
     return { payload: clickedPersonID };
   }),
+
+  EDIT_PERSON_INFO: createAction(
+    'EDIT_PERSON_INFO',
+    (clickedPersonID: string, name: string, value: string | number) => {
+      return {
+        payload: { clickedPersonID, name, value },
+      };
+    }
+  ),
 };
 
-export const { STORE_INITIAL_PEOPLE, ADD_NEW_PERSON, DELETE_PERSON } = peopleActions;
+export const { STORE_INITIAL_PEOPLE, ADD_NEW_PERSON, DELETE_PERSON, EDIT_PERSON_INFO } = peopleActions;
 
 export type peopleActions = ReturnType<typeof STORE_INITIAL_PEOPLE> | ReturnType<typeof ADD_NEW_PERSON>;
