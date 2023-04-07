@@ -1,6 +1,6 @@
 import { personType } from '../types/personType';
 
-export const personState: personType = {
+export const person: personType = {
   firstName: '',
   lastName: '',
   age: 0,

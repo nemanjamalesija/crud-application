@@ -1,3 +1,7 @@
-import { personState } from './personState';
+import { peopleType } from '../types/peopleTypes';
+import { person } from './personState';
 
-export const peopleState = [personState];
+export const people: peopleType = {
+  peopleSTATE: [person],
+  loading: true,
+};

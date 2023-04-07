@@ -1,8 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { STORE_PERSON_INFO } from '../actions/personActions';
-import { personState } from '../states/personState';
+import { person } from '../states/personState';
 
-export const personReducer = createReducer(personState, (builder) => {
+export const personReducer = createReducer(person, (builder) => {
   builder.addCase(STORE_PERSON_INFO, (state, action) => {
     const { payload } = action;
 

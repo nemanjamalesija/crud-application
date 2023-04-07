@@ -2,17 +2,14 @@ import { STORE_INITIAL_PEOPLE } from './actions/peopleActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './types/rootState';
 import { nanoid } from '@reduxjs/toolkit';
+import { useEffect } from 'react';
+import { apiURL } from './constants/apiURL';
 import Person from './components/Person';
 import Form from './components/Form';
-import useFetchPeople from './hooks/useFetchPeople';
-import { useEffect } from 'react';
-import { STOP_LOADING } from './actions/generalStateActions';
 import axios from 'axios';
-import { apiURL } from './constants/apiURL';
 
 function App() {
-  const peopleSTATE = useSelector((state: RootState) => state.peopleReducer);
-  const { loading } = useSelector((state: RootState) => state.generalStateReducer);
+  const { peopleSTATE, loading } = useSelector((state: RootState) => state.peopleReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +25,6 @@ function App() {
 
         if (status === 'success') {
           dispatch(STORE_INITIAL_PEOPLE(people));
-          dispatch(STOP_LOADING());
         }
       } catch (error) {
         console.log(error);

@@ -1,9 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
-import { peopleType } from '../types/peopleTypes';
 import { personType } from '../types/personType';
 
 const peopleActions = {
-  STORE_INITIAL_PEOPLE: createAction('STORE_INITIAL_PEOPLE', (peopleAPI: peopleType) => {
+  STORE_INITIAL_PEOPLE: createAction('STORE_INITIAL_PEOPLE', (peopleAPI: personType[]) => {
     return {
       payload: peopleAPI,
     };
