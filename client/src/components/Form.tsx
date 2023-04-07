@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { ADD_NEW_PERSON } from '../actions/peopleActions';
 import { RootState } from '../types/rootState';
 import { personType } from '../types/personType';
-import { ADD_NEW_PERSON } from '../actions/peopleActions';
-import { apiURL } from '../constants/apiURL';
 import { formType } from '../types/formTypes';
+import { apiURL } from '../constants/apiURL';
 import axios from 'axios';
 
 const Form = ({ onChangeHandler }: formType) => {

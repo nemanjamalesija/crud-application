@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { personType } from '../types/personType';
 import { apiURL } from '../constants/apiURL';
 import { useDispatch } from 'react-redux';

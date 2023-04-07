@@ -1,11 +1,8 @@
 import React from 'react';
 import { editFormType } from '../types/formTypes';
 import { useDispatch } from 'react-redux';
-import { EDIT_PERSON_INFO } from '../actions/peopleActions';
 
 const EditForm = ({ firstName, lastName, age, city, adress, _id, onClickHandler, onChangeHandler }: editFormType) => {
-  const dispatch = useDispatch();
-
   return (
     <form>
       <div className='form-control'>

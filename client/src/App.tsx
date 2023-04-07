@@ -1,6 +1,7 @@
 import { EDIT_PERSON_INFO, STORE_INITIAL_PEOPLE } from './actions/peopleActions';
 import { STORE_PERSON_INFO } from './actions/personActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { personType } from './types/personType';
 import { RootState } from './types/rootState';
 import { useEffect, useState } from 'react';
 import { apiURL } from './constants/apiURL';
@@ -8,7 +9,6 @@ import Person from './components/Person';
 import Form from './components/Form';
 import EditForm from './components/EditForm';
 import axios from 'axios';
-import { personType } from './types/personType';
 
 function App() {
   const { peopleSTATE, loading } = useSelector((state: RootState) => state.peopleReducer);
@@ -22,11 +22,12 @@ function App() {
     dispatch(STORE_PERSON_INFO(key, value));
   };
 
+  // EDIT HANDLERS
   const setEditPersonIDHandler = (id: string) => {
     setEditPersonID(id);
   };
 
-  const storePropsEDIT = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
+  const editPropsHandler = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const key = e.currentTarget.name;
     const value = e.currentTarget.value;
 
@@ -80,7 +81,7 @@ function App() {
               {...person}
               key={person._id}
               onClickHandler={finishEditingHandler}
-              onChangeHandler={storePropsEDIT}
+              onChangeHandler={editPropsHandler}
             />
           ) : (
             <Person key={person._id} {...person} onClickHandler={setEditPersonIDHandler} />
