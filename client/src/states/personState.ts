@@ -6,5 +6,4 @@ export const person: personType = {
   age: 0,
   city: '',
   adress: '',
-  date: '',
 };

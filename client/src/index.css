@@ -13,7 +13,26 @@ html {
   margin: 0 auto;
 }
 
+.people-container > :nth-child(odd) {
+  background-color: orangered;
+}
+
 .person-article {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 2fr 2fr;
+  grid-template-columns: 1fr 1fr 0.5fr 2fr 1fr 1fr;
+  padding: 1rem 2rem;
+
+  border-radius: 1rem;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.person-adress,
+.edit-delete-control {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.edit-delete-control .btn {
+  width: 80%;
 }

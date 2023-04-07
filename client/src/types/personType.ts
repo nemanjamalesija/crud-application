@@ -3,7 +3,7 @@ export type personType = {
   firstName: string;
   lastName: string;
   age: number;
-  date?: string;
+  createdDate?: string;
   city: string;
   adress: string;
 };

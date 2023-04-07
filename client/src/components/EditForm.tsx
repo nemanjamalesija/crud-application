@@ -1,6 +1,4 @@
-import React from 'react';
 import { editFormType } from '../types/formTypes';
-import { useDispatch } from 'react-redux';
 
 const EditForm = ({ firstName, lastName, age, city, adress, _id, onClickHandler, onChangeHandler }: editFormType) => {
   return (
