@@ -30,6 +30,8 @@ const Form = ({ onChangeHandler }: formType) => {
     }
   };
 
+  console.log(newPerson);
+
   return (
     <form>
       <div className='form-control'>

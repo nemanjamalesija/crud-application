@@ -7,3 +7,13 @@
 html {
   font-size: 62.5%;
 }
+
+.people-container {
+  width: 120rem;
+  margin: 0 auto;
+}
+
+.person-article {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr 2fr;
+}

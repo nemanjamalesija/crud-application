@@ -33,10 +33,10 @@ const Person = ({ firstName, lastName, age, city, adress, date, _id, onClickHand
         <p className='person-date'>{date}</p>
       </div>
       <div className='edit-delete-control'>
-        <button className='btn btn-edit' onClick={() => onClickHandler(_id)}>
+        <button className='btn btn-edit' onClick={() => onClickHandler(_id as string)}>
           Edit
         </button>
-        <button className='btn btn-edit' onClick={() => deletePersonHandler(_id)}>
+        <button className='btn btn-edit' onClick={() => deletePersonHandler(_id as string)}>
           Delete
         </button>
       </div>
