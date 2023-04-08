@@ -5,13 +5,7 @@ const EditForm = ({ firstName, lastName, age, city, adress, _id, onClickHandler,
     <form>
       <div className='form-control'>
         <label>Name</label>
-        <input
-          name='firstName'
-          type='text'
-          required
-          value={firstName}
-          onChange={(e) => onChangeHandler(_id as string, e)}
-        />
+        <input name='firstName' type='text' required value={firstName} onChange={(e) => onChangeHandler(_id as string, e)} />
       </div>
       <div className='form-control'>
         <label>Last Name</label>

@@ -1,14 +1,14 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ADD_NEW_PERSON } from '../actions/peopleActions';
-import { RootState } from '../types/rootState';
 import { personType } from '../types/personType';
 import { formType } from '../types/formTypes';
 import { apiURL } from '../constants/apiURL';
 import axios from 'axios';
+import { useAppSelector } from '../hooks/useAppSelector';
 
 const Form = ({ onChangeHandler }: formType) => {
-  const newPerson = useSelector((state: RootState) => state.personReducer);
+  const newPerson = useAppSelector((state) => state.personReducer);
   const dispatch = useDispatch();
 
   const { firstName, lastName, age, city, adress } = newPerson;

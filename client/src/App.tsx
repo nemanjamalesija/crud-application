@@ -9,10 +9,10 @@ import Person from './components/Person';
 import Form from './components/Form';
 import EditForm from './components/EditForm';
 import axios from 'axios';
-import { nanoid } from '@reduxjs/toolkit';
+import { useAppSelector } from './hooks/useAppSelector';
 
 function App() {
-  const { peopleSTATE, loading } = useSelector((state: RootState) => state.peopleReducer);
+  const { peopleSTATE, loading } = useAppSelector((state) => state.peopleReducer);
   const dispatch = useDispatch();
   const [editItemId, setEditPersonID] = useState('');
 
