@@ -34,7 +34,7 @@ const Form = ({ onChangeHandler }: formType) => {
   };
 
   return (
-    <form>
+    <form className='main-form'>
       <div className='form-control'>
         <label>Name</label>
         <input
@@ -57,7 +57,15 @@ const Form = ({ onChangeHandler }: formType) => {
       </div>
       <div className='form-control'>
         <label>Age</label>
-        <input name='age' type='number' required value={age} onChange={onChangeHandler} />
+        <input
+          name='age'
+          type='number'
+          required
+          min={18}
+          max={65}
+          value={age}
+          onChange={onChangeHandler}
+        />
       </div>
       <div className='form-control'>
         <label>City</label>
