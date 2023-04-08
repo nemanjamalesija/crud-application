@@ -1,19 +1,24 @@
-import { EDIT_PERSON_INFO, STORE_INITIAL_PEOPLE } from './actions/peopleActions';
 import { useAppSelector } from './hooks/useAppSelector';
 import { useAppDispatch } from './hooks/useAppDispatch';
 import { STORE_PERSON_INFO } from './actions/personActions';
 import { personType } from './types/personType';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { apiURL } from './constants/apiURL';
 import Person from './components/Person';
 import Form from './components/Form';
 import EditForm from './components/EditForm';
 import axios from 'axios';
+import {
+  editPersonInfo,
+  finishEditing,
+  storeInitialPeople,
+} from './reducers/peopleReducer';
 
 function App() {
-  const { peopleSTATE, loading } = useAppSelector((state) => state.peopleReducer);
+  const { peopleSTATE, loading, currentPersonID } = useAppSelector(
+    (state) => state.peopleReducer
+  );
   const dispatch = useAppDispatch();
-  const [editItemId, setEditPersonID] = useState('');
 
   const storeNewPersonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const key = e.currentTarget.name;
@@ -22,19 +27,22 @@ function App() {
     dispatch(STORE_PERSON_INFO(key, value));
   };
 
-  // EDIT HANDLERS
-  const setEditPersonIDHandler = (id: string) => {
-    setEditPersonID(id);
-  };
+  const editPropsHandler = (
+    id: string | undefined,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (!id) return;
 
-  const editPropsHandler = (id: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const key = e.currentTarget.name;
     const value = e.currentTarget.value;
 
-    dispatch(EDIT_PERSON_INFO(id, key, value));
+    dispatch(editPersonInfo({ id, key, value }));
   };
 
-  const finishEditingHandler = async (e: React.MouseEvent<HTMLButtonElement>, currentPersonObj: personType) => {
+  const finishEditingHandler = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+    currentPersonObj: personType
+  ) => {
     e.preventDefault();
     const { _id } = currentPersonObj;
 
@@ -43,8 +51,7 @@ function App() {
     } catch (error) {
       console.log(error);
     }
-
-    setEditPersonID('');
+    dispatch(finishEditing());
   };
 
   useEffect(() => {
@@ -59,7 +66,7 @@ function App() {
         } = response;
 
         if (status === 'success') {
-          dispatch(STORE_INITIAL_PEOPLE(people));
+          dispatch(storeInitialPeople(people));
         }
       } catch (error) {
         console.log(error);
@@ -76,7 +83,7 @@ function App() {
       <Form onChangeHandler={storeNewPersonHandler} />
       <div className='people-container'>
         {peopleSTATE.map((person) => {
-          return editItemId === person._id ? (
+          return currentPersonID === person._id ? (
             <EditForm
               {...person}
               key={person._id}
@@ -84,7 +91,7 @@ function App() {
               onChangeHandler={editPropsHandler}
             />
           ) : (
-            <Person key={person._id} {...person} onClickHandler={setEditPersonIDHandler} />
+            <Person key={person._id} {...person} />
           );
         })}
       </div>

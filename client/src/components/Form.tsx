@@ -1,12 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { ADD_NEW_PERSON } from '../actions/peopleActions';
 import { personType } from '../types/personType';
 import { formType } from '../types/formTypes';
 import { apiURL } from '../constants/apiURL';
-import axios from 'axios';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
+import { addNewPerson } from '../reducers/peopleReducer';
+import axios from 'axios';
 
 const Form = ({ onChangeHandler }: formType) => {
   const newPerson = useAppSelector((state) => state.personReducer);
@@ -14,7 +13,10 @@ const Form = ({ onChangeHandler }: formType) => {
 
   const { firstName, lastName, age, city, adress } = newPerson;
 
-  const createNewPersonHandler = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, newPerson: personType) => {
+  const createNewPersonHandler = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    newPerson: personType
+  ) => {
     e.preventDefault();
 
     try {
@@ -25,23 +27,33 @@ const Form = ({ onChangeHandler }: formType) => {
         },
       } = response;
 
-      dispatch(ADD_NEW_PERSON(newPersonServerResponse));
+      dispatch(addNewPerson(newPersonServerResponse));
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(newPerson);
-
   return (
     <form>
       <div className='form-control'>
         <label>Name</label>
-        <input name='firstName' type='text' required value={firstName} onChange={onChangeHandler} />
+        <input
+          name='firstName'
+          type='text'
+          required
+          value={firstName}
+          onChange={onChangeHandler}
+        />
       </div>
       <div className='form-control'>
         <label>Last Name</label>
-        <input name='lastName' type='text' required value={lastName} onChange={onChangeHandler} />
+        <input
+          name='lastName'
+          type='text'
+          required
+          value={lastName}
+          onChange={onChangeHandler}
+        />
       </div>
       <div className='form-control'>
         <label>Age</label>
@@ -55,7 +67,11 @@ const Form = ({ onChangeHandler }: formType) => {
         <label>Adress</label>
         <input name='adress' type='text' value={adress} onChange={onChangeHandler} />
       </div>
-      <button className='btn-form' type='submit' onClick={(e) => createNewPersonHandler(e, newPerson)}>
+      <button
+        className='btn-form'
+        type='submit'
+        onClick={(e) => createNewPersonHandler(e, newPerson)}
+      >
         Submit
       </button>
     </form>
