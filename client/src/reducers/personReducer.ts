@@ -1,13 +1,22 @@
-import { createReducer } from '@reduxjs/toolkit';
-import { STORE_PERSON_INFO } from '../actions/personActions';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { person } from '../states/personState';
 
-export const personReducer = createReducer(person, (builder) => {
-  builder.addCase(STORE_PERSON_INFO, (state, action) => {
-    const { payload } = action;
+const personSlice = createSlice({
+  name: 'person',
+  initialState: person,
+  reducers: {
+    storePersonInfo: (
+      state,
+      action: PayloadAction<{ key: string; value: string | number }>
+    ) => {
+      const { payload } = action;
 
-    const { key, value } = payload;
+      const { key, value } = payload;
 
-    return { ...state, [key]: value };
-  });
+      return { ...state, [key]: value };
+    },
+  },
 });
+
+export const personReducer = personSlice.reducer;
+export const { storePersonInfo } = personSlice.actions;

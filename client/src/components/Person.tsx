@@ -1,16 +1,24 @@
 import { personType } from '../types/personType';
 import { apiURL } from '../constants/apiURL';
-import { DELETE_PERSON, SET_CURRENT_PERSON_ID } from '../actions/peopleActions';
 import { useAppDispatch } from '../hooks/useAppDispatch';
+import { deletePerson, setCurrentPersonID } from '../reducers/peopleReducer';
 import axios from 'axios';
 
-const Person = ({ firstName, lastName, age, city, adress, createdDate, _id }: personType) => {
+const Person = ({
+  firstName,
+  lastName,
+  age,
+  city,
+  adress,
+  createdDate,
+  _id,
+}: personType) => {
   const dispatch = useAppDispatch();
 
   const deletePersonHandler = async (id: string) => {
     await axios.delete(`${apiURL}/${_id}`);
 
-    dispatch(DELETE_PERSON(id));
+    dispatch(deletePerson(id));
   };
 
   return (
@@ -30,10 +38,16 @@ const Person = ({ firstName, lastName, age, city, adress, createdDate, _id }: pe
       </address>
       <p className='person-date'>{createdDate}</p>
       <div className='edit-delete-control'>
-        <button className='btn btn-edit' onClick={() => dispatch(SET_CURRENT_PERSON_ID(_id))}>
+        <button
+          className='btn btn-edit'
+          onClick={() => dispatch(setCurrentPersonID(_id))}
+        >
           Edit
         </button>
-        <button className='btn btn-edit' onClick={() => deletePersonHandler(_id as string)}>
+        <button
+          className='btn btn-edit'
+          onClick={() => deletePersonHandler(_id as string)}
+        >
           Delete
         </button>
       </div>

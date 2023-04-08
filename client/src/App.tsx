@@ -1,6 +1,5 @@
 import { useAppSelector } from './hooks/useAppSelector';
 import { useAppDispatch } from './hooks/useAppDispatch';
-import { STORE_PERSON_INFO } from './actions/personActions';
 import { personType } from './types/personType';
 import { useEffect } from 'react';
 import { apiURL } from './constants/apiURL';
@@ -13,6 +12,7 @@ import {
   finishEditing,
   storeInitialPeople,
 } from './reducers/peopleReducer';
+import { storePersonInfo } from './reducers/personReducer';
 
 function App() {
   const { peopleSTATE, loading, currentPersonID } = useAppSelector(
@@ -24,7 +24,7 @@ function App() {
     const key = e.currentTarget.name;
     const value = e.currentTarget.value;
 
-    dispatch(STORE_PERSON_INFO(key, value));
+    dispatch(storePersonInfo({ key, value }));
   };
 
   const editPropsHandler = (
