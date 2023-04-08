@@ -45,7 +45,7 @@ body {
   font-weight: 400;
 }
 
-.people-container {
+.app {
   width: 120rem;
   margin: 0 auto;
   background-color: #fff;
@@ -54,7 +54,7 @@ body {
   border-radius: 0.9rem;
 }
 
-.people-container::before {
+.app::before {
   content: '';
   position: absolute;
   top: 0;
@@ -67,7 +67,7 @@ body {
   border-top-right-radius: 0.9rem;
 }
 
-.people-container > :nth-child(odd):not(:first-child) {
+.people-container > :nth-child(odd) {
   background-color: #f3f3f3;
 }
 

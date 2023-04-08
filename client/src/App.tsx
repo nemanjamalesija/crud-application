@@ -1,23 +1,18 @@
-import { useAppSelector } from './hooks/useAppSelector';
 import { useAppDispatch } from './hooks/useAppDispatch';
-import { personType } from './types/personType';
 import { useEffect } from 'react';
 import { apiURL } from './constants/apiURL';
 import Person from './components/Person';
 import Form from './components/Form';
 import EditForm from './components/EditForm';
 import axios from 'axios';
-import {
-  editPersonInfo,
-  finishEditing,
-  storeInitialPeople,
-} from './reducers/peopleReducer';
+import { storeInitialPeople } from './reducers/peopleReducer';
 import { storePersonInfo } from './reducers/personReducer';
+import Categories from './components/Categories';
+import People from './components/People';
+import { useAppSelector } from './hooks/useAppSelector';
 
 function App() {
-  const { peopleSTATE, loading, currentPersonID } = useAppSelector(
-    (state) => state.peopleReducer
-  );
+  const { loading } = useAppSelector((state) => state.peopleReducer);
   const dispatch = useAppDispatch();
 
   const storeNewPersonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,33 +20,6 @@ function App() {
     const value = e.currentTarget.value;
 
     dispatch(storePersonInfo({ key, value }));
-  };
-
-  const editPropsHandler = (
-    id: string | undefined,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (!id) return;
-
-    const key = e.currentTarget.name;
-    const value = e.currentTarget.value;
-
-    dispatch(editPersonInfo({ id, key, value }));
-  };
-
-  const finishEditingHandler = async (
-    e: React.MouseEvent<HTMLButtonElement>,
-    currentPersonObj: personType
-  ) => {
-    e.preventDefault();
-    const { _id } = currentPersonObj;
-
-    try {
-      await axios.patch(`${apiURL}${_id}`, currentPersonObj);
-    } catch (error) {
-      console.log(error);
-    }
-    dispatch(finishEditing());
   };
 
   useEffect(() => {
@@ -79,32 +47,11 @@ function App() {
   if (loading) return <h1>Loading...</h1>;
 
   return (
-    <div className='App'>
+    <div className='app'>
       <Form onChangeHandler={storeNewPersonHandler} />
-
-      <div className='people-container'>
-        <h1 className='heading-primary'>Employee managment software</h1>
-        <div className='categories'>
-          <h2 className='heading-secondary'>First Name</h2>
-          <h2 className='heading-secondary'>Last Name</h2>
-          <h2 className='heading-secondary'>Age</h2>
-          <h2 className='heading-secondary'>City</h2>
-          <h2 className='heading-secondary'>Adress</h2>
-          <h2 className='heading-secondary'>Start Date</h2>
-        </div>
-        {peopleSTATE.map((person) => {
-          return currentPersonID === person._id ? (
-            <EditForm
-              {...person}
-              key={person._id}
-              onClickHandler={finishEditingHandler}
-              onChangeHandler={editPropsHandler}
-            />
-          ) : (
-            <Person key={person._id} {...person} />
-          );
-        })}
-      </div>
+      <h1 className='heading-primary'>Employee managment software</h1>
+      <Categories />
+      <People />
     </div>
   );
 }
