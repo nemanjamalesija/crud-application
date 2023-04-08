@@ -19,6 +19,9 @@ const Form = ({ onChangeHandler }: formType) => {
   ) => {
     e.preventDefault();
 
+    if (!firstName || !lastName || !age || !city || !adress)
+      return alert('You must complete all fields');
+
     try {
       const response = await axios.post(apiURL, newPerson);
       const {
