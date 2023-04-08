@@ -7,7 +7,3 @@ export type personType = {
   city: string;
   adress: string;
 };
-
-type personHandlers = {
-  onClickHandler: (id: string) => void;
-};

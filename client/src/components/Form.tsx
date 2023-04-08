@@ -6,10 +6,11 @@ import { formType } from '../types/formTypes';
 import { apiURL } from '../constants/apiURL';
 import axios from 'axios';
 import { useAppSelector } from '../hooks/useAppSelector';
+import { useAppDispatch } from '../hooks/useAppDispatch';
 
 const Form = ({ onChangeHandler }: formType) => {
   const newPerson = useAppSelector((state) => state.personReducer);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { firstName, lastName, age, city, adress } = newPerson;
 

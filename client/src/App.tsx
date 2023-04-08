@@ -1,19 +1,18 @@
 import { EDIT_PERSON_INFO, STORE_INITIAL_PEOPLE } from './actions/peopleActions';
+import { useAppSelector } from './hooks/useAppSelector';
+import { useAppDispatch } from './hooks/useAppDispatch';
 import { STORE_PERSON_INFO } from './actions/personActions';
-import { useDispatch, useSelector } from 'react-redux';
 import { personType } from './types/personType';
-import { RootState } from './types/rootState';
 import { useEffect, useState } from 'react';
 import { apiURL } from './constants/apiURL';
 import Person from './components/Person';
 import Form from './components/Form';
 import EditForm from './components/EditForm';
 import axios from 'axios';
-import { useAppSelector } from './hooks/useAppSelector';
 
 function App() {
   const { peopleSTATE, loading } = useAppSelector((state) => state.peopleReducer);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [editItemId, setEditPersonID] = useState('');
 
   const storeNewPersonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

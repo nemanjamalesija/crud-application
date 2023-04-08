@@ -1,7 +1,7 @@
 import { personType } from '../types/personType';
 import { apiURL } from '../constants/apiURL';
-import { useDispatch } from 'react-redux';
 import { DELETE_PERSON } from '../actions/peopleActions';
+import { useAppDispatch } from '../hooks/useAppDispatch';
 import axios from 'axios';
 
 type personPropsType = personType & {
@@ -9,7 +9,7 @@ type personPropsType = personType & {
 };
 
 const Person = ({ firstName, lastName, age, city, adress, createdDate, _id, onClickHandler }: personPropsType) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const deletePersonHandler = async (id: string) => {
     await axios.delete(`${apiURL}/${_id}`);
