@@ -21,22 +21,22 @@ const Person = ({
     dispatch(deletePerson(id));
   };
 
+  const formatedDate = new Date(createdDate).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+
   return (
     <article className='person-article'>
-      <div className='person-div-control'>
-        <h3 className='heading-tertiary'>{firstName}</h3>
-      </div>
-      <div className='person-div-control'>
-        <h3 className='heading-tertiary'>{lastName}</h3>
-      </div>
-      <div className='person-div-control'>
-        <p className='person-age'>{age}</p>
-      </div>
-      <address className='person-adress'>
-        <p className='person-adress'>{city}</p>
-        <p className='person-adress'>{adress}</p>
+      <p className='person-info'>{firstName}</p>
+      <p className='person-info'>{lastName}</p>
+      <p className='person-age'>{age}</p>
+      <p className='person-info'>{city}</p>
+      <address className='person-info'>
+        <p className='person-info'>{adress}</p>
       </address>
-      <p className='person-date'>{createdDate}</p>
+      <p className='person-info'>{formatedDate}</p>
       <div className='edit-delete-control'>
         <button
           className='btn btn-edit'
@@ -45,7 +45,7 @@ const Person = ({
           Edit
         </button>
         <button
-          className='btn btn-edit'
+          className='btn btn-delete'
           onClick={() => deletePersonHandler(_id as string)}
         >
           Delete

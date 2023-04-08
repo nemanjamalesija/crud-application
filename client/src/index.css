@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -8,31 +10,113 @@ html {
   font-size: 62.5%;
 }
 
+body {
+  background: #457fca; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #5691c8,
+    #457fca
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #5691c8,
+    #457fca
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  font-family: 'Open Sans';
+  color: #444;
+}
+
+.heading-primary {
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+  color: #222;
+  font-weight: 600;
+  padding: 1rem 0 0.5rem 0;
+}
+
+.heading-secondary {
+  font-size: 1.6rem;
+  color: #222;
+  font-weight: 600;
+}
+
+.heading-tertiary {
+  font-weight: 400;
+}
+
 .people-container {
   width: 120rem;
   margin: 0 auto;
+  background-color: #fff;
+  padding: 2rem;
+  position: relative;
+  border-radius: 0.9rem;
 }
 
-.people-container > :nth-child(odd) {
-  background-color: orangered;
+.people-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: #313131;
+  z-index: 1;
+  border-top-left-radius: 0.9rem;
+  border-top-right-radius: 0.9rem;
 }
 
-.person-article {
+.people-container > :nth-child(odd):not(:first-child) {
+  background-color: #f3f3f3;
+}
+
+.person-article,
+.categories {
   display: grid;
-  grid-template-columns: 1fr 1fr 0.5fr 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 0.5fr 1fr 1.5fr 1fr 1fr;
   padding: 1rem 2rem;
-
-  border-radius: 1rem;
   align-items: center;
   font-size: 1.4rem;
 }
 
-.person-adress,
-.edit-delete-control {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.person-article {
+  border-top: 1px solid #dbdbdb;
 }
 
-.edit-delete-control .btn {
-  width: 80%;
+.edit-delete-control,
+.categories div {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.edit-delete-control {
+  gap: 2rem;
+}
+
+.btn {
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  text-align: center;
+}
+
+.btn-edit {
+  background-color: #ffb900;
+  background-color: #5691c8;
+}
+
+.btn-edit:hover {
+  background-color: #457fca;
+}
+
+.btn-delete {
+  background-color: #ff3333;
+}
+
+.btn-delete:hover {
+  background-color: #ff1a1a;
 }

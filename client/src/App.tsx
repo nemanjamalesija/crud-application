@@ -81,7 +81,17 @@ function App() {
   return (
     <div className='App'>
       <Form onChangeHandler={storeNewPersonHandler} />
+
       <div className='people-container'>
+        <h1 className='heading-primary'>Employee managment software</h1>
+        <div className='categories'>
+          <h2 className='heading-secondary'>First Name</h2>
+          <h2 className='heading-secondary'>Last Name</h2>
+          <h2 className='heading-secondary'>Age</h2>
+          <h2 className='heading-secondary'>City</h2>
+          <h2 className='heading-secondary'>Adress</h2>
+          <h2 className='heading-secondary'>Start Date</h2>
+        </div>
         {peopleSTATE.map((person) => {
           return currentPersonID === person._id ? (
             <EditForm
