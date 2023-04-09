@@ -5,10 +5,6 @@ const globalStateSlice = createSlice({
   name: 'person',
   initialState: generalState,
   reducers: {
-    stopLoading: (state) => {
-      return { ...state, loading: false };
-    },
-
     toggleForm: (state) => {
       return { ...state, showMainForm: !state.showMainForm };
     },
@@ -16,4 +12,4 @@ const globalStateSlice = createSlice({
 });
 
 export const globalStateReducer = globalStateSlice.reducer;
-export const { stopLoading, toggleForm } = globalStateSlice.actions;
+export const { toggleForm } = globalStateSlice.actions;

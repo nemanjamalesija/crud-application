@@ -1,18 +1,15 @@
-import { useAppDispatch } from './hooks/useAppDispatch';
-import { useEffect } from 'react';
-import { apiURL } from './constants/apiURL';
-import Form from './components/Form';
-import axios from 'axios';
-import { storeInitialPeople } from './reducers/peopleReducer';
-import { storePersonInfo } from './reducers/personReducer';
 import Categories from './components/Categories';
-import People from './components/People';
+import { useAppDispatch } from './hooks/useAppDispatch';
 import { useAppSelector } from './hooks/useAppSelector';
+import { toggleForm } from './reducers/globalStateReducer';
+import { storePersonInfo } from './reducers/personReducer';
+import Form from './components/Form';
 import Header from './components/Header';
-import { stopLoading, toggleForm } from './reducers/globalStateReducer';
+import People from './components/People';
 
 function App() {
-  const { loading, showMainForm } = useAppSelector((state) => state.globalStateReducer);
+  const { showMainForm } = useAppSelector((state) => state.globalStateReducer);
+  const { loading, error } = useAppSelector((state) => state.peopleReducer);
   const dispatch = useAppDispatch();
 
   const storeNewPersonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,30 +19,9 @@ function App() {
     dispatch(storePersonInfo({ key, value }));
   };
 
-  useEffect(() => {
-    const getAllUsers = async () => {
-      try {
-        const response = await axios(apiURL);
-        const {
-          data: {
-            status,
-            data: { people },
-          },
-        } = response;
-
-        if (status === 'success') {
-          dispatch(storeInitialPeople(people));
-          dispatch(stopLoading());
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getAllUsers();
-  }, []);
-
   if (loading) return <h1>Loading...</h1>;
+
+  if (error) return <h1>`Sorry, there has been an error: ${error}`</h1>;
 
   return (
     <div className='app'>

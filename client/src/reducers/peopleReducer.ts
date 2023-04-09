@@ -1,17 +1,29 @@
-import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 import { people } from '../states/peopleState';
 import { personType } from '../types/personType';
+import axios from 'axios';
+import { apiURL } from '../constants/apiURL';
+
+export const getAllPeople = createAsyncThunk(apiURL, async (_, { rejectWithValue }) => {
+  try {
+    const response = await axios(apiURL);
+    const {
+      data: {
+        data: { people },
+      },
+    } = response;
+
+    console.log(response);
+    return people;
+  } catch (error: any) {
+    return rejectWithValue(error.message);
+  }
+});
 
 const peopleSlice = createSlice({
   name: 'people',
   initialState: people,
   reducers: {
-    storeInitialPeople: (state, action: PayloadAction<personType[]>) => {
-      const { payload: peopleAPI } = action;
-
-      return { ...state, peopleSTATE: peopleAPI, loading: false };
-    },
-
     addNewPerson: (state, action: PayloadAction<personType>) => {
       const { payload: newPerson } = action;
 
@@ -58,11 +70,25 @@ const peopleSlice = createSlice({
       return { ...state, currentPersonID: undefined };
     },
   },
+
+  extraReducers: (bulider) => {
+    bulider.addCase(getAllPeople.pending, (state, action) => {
+      state.loading = true;
+    });
+
+    bulider.addCase(getAllPeople.fulfilled, (state, action) => {
+      state.loading = false;
+      state.peopleSTATE = action.payload;
+    });
+    bulider.addCase(getAllPeople.rejected, (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    });
+  },
 });
 
 export const peopleReducer = peopleSlice.reducer;
 export const {
-  storeInitialPeople,
   addNewPerson,
   deletePerson,
   editPersonInfo,
