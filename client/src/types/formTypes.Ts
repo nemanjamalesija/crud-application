@@ -1,4 +1,3 @@
-import { peopleType } from './peopleTypes';
 import { personType } from './personType';
 
 export type formType = {
@@ -7,5 +6,8 @@ export type formType = {
 
 export type editFormType = personType & {
   onClickHandler: (e: React.MouseEvent<HTMLButtonElement>, ...args: personType[]) => void;
-  onChangeHandler: (id: string | undefined, e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChangeHandler: (
+    id: string | undefined,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 };
