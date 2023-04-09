@@ -6,12 +6,15 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { addNewPerson } from '../reducers/peopleReducer';
 import axios from 'axios';
+import { toggleForm } from '../reducers/globalStateReducer';
+import { resetPersonState } from '../reducers/personReducer';
 
 const Form = ({ onChangeHandler }: formType) => {
-  const newPerson = useAppSelector((state) => state.personReducer);
+  const { firstName, lastName, age, city, adress, createdDate } = useAppSelector(
+    (state) => state.personReducer
+  );
+  const { showMainForm } = useAppSelector((state) => state.globalStateReducer);
   const dispatch = useAppDispatch();
-
-  const { firstName, lastName, age, city, adress } = newPerson;
 
   const createNewPersonHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -31,13 +34,16 @@ const Form = ({ onChangeHandler }: formType) => {
       } = response;
 
       dispatch(addNewPerson(newPersonServerResponse));
+      dispatch(resetPersonState());
     } catch (error) {
       console.log(error);
     }
+
+    dispatch(toggleForm());
   };
 
   return (
-    <form className='main-form'>
+    <form className={`${showMainForm ? 'main-form ' : 'main-form hidden'}`}>
       <div className='form-control'>
         <label>Name</label>
         <input
@@ -45,6 +51,7 @@ const Form = ({ onChangeHandler }: formType) => {
           type='text'
           required
           value={firstName}
+          placeholder='John'
           onChange={onChangeHandler}
         />
       </div>
@@ -55,6 +62,7 @@ const Form = ({ onChangeHandler }: formType) => {
           type='text'
           required
           value={lastName}
+          placeholder='Doe'
           onChange={onChangeHandler}
         />
       </div>
@@ -72,16 +80,37 @@ const Form = ({ onChangeHandler }: formType) => {
       </div>
       <div className='form-control'>
         <label>City</label>
-        <input name='city' type='text' value={city} onChange={onChangeHandler} />
+        <input
+          name='city'
+          type='text'
+          value={city}
+          placeholder='New Orleans'
+          onChange={onChangeHandler}
+        />
       </div>
       <div className='form-control'>
         <label>Adress</label>
-        <input name='adress' type='text' value={adress} onChange={onChangeHandler} />
+        <input
+          name='adress'
+          type='text'
+          value={adress}
+          placeholder='1 My Place 81000'
+          onChange={onChangeHandler}
+        />
       </div>
       <button
-        className='btn-form'
+        className='btn btn-form'
         type='submit'
-        onClick={(e) => createNewPersonHandler(e, newPerson)}
+        onClick={(e) =>
+          createNewPersonHandler(e, {
+            firstName,
+            lastName,
+            age,
+            city,
+            adress,
+            createdDate,
+          })
+        }
       >
         Submit
       </button>

@@ -15,8 +15,19 @@ const personSlice = createSlice({
 
       return { ...state, [key]: value };
     },
+
+    resetPersonState: (state) => {
+      return {
+        firstName: '',
+        lastName: '',
+        age: 18,
+        city: '',
+        adress: '',
+        createdDate: '',
+      };
+    },
   },
 });
 
 export const personReducer = personSlice.reducer;
-export const { storePersonInfo } = personSlice.actions;
+export const { storePersonInfo, resetPersonState } = personSlice.actions;

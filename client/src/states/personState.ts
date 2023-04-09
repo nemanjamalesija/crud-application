@@ -6,5 +6,5 @@ export const person: personType = {
   age: 18,
   city: '',
   adress: '',
-  createdDate: new Date().toISOString(),
+  createdDate: '',
 };

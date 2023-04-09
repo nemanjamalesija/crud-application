@@ -1,18 +1,18 @@
 import { useAppDispatch } from './hooks/useAppDispatch';
 import { useEffect } from 'react';
 import { apiURL } from './constants/apiURL';
-import Person from './components/Person';
 import Form from './components/Form';
-import EditForm from './components/EditForm';
 import axios from 'axios';
 import { storeInitialPeople } from './reducers/peopleReducer';
 import { storePersonInfo } from './reducers/personReducer';
 import Categories from './components/Categories';
 import People from './components/People';
 import { useAppSelector } from './hooks/useAppSelector';
+import Header from './components/Header';
+import { stopLoading, toggleForm } from './reducers/globalStateReducer';
 
 function App() {
-  const { loading } = useAppSelector((state) => state.peopleReducer);
+  const { loading, showMainForm } = useAppSelector((state) => state.globalStateReducer);
   const dispatch = useAppDispatch();
 
   const storeNewPersonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +35,7 @@ function App() {
 
         if (status === 'success') {
           dispatch(storeInitialPeople(people));
+          dispatch(stopLoading());
         }
       } catch (error) {
         console.log(error);
@@ -49,9 +50,13 @@ function App() {
   return (
     <div className='app'>
       <Form onChangeHandler={storeNewPersonHandler} />
-      <h1 className='heading-primary'>Employee managment software</h1>
+      <Header />
       <Categories />
       <People />
+      <div
+        className={`${showMainForm ? 'overlay' : 'overlay hidden'}`}
+        onClick={() => dispatch(toggleForm())}
+      ></div>
     </div>
   );
 }
