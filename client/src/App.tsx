@@ -3,14 +3,14 @@ import { useAppDispatch } from './hooks/useAppDispatch';
 import { useAppSelector } from './hooks/useAppSelector';
 import { toggleForm } from './reducers/globalStateReducer';
 import { storePersonInfo } from './reducers/personReducer';
+import { useGetPeopleData } from './hooks/useGetPeople';
 import Form from './components/Form';
 import Header from './components/Header';
 import People from './components/People';
-import { useGetPeople } from './hooks/useGetPeople';
 
 function App() {
   const { showMainForm } = useAppSelector((state) => state.globalStateReducer);
-  const { loading, error } = useGetPeople();
+  const { loading, error } = useGetPeopleData();
   const dispatch = useAppDispatch();
 
   const storeNewPersonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

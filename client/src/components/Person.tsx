@@ -2,8 +2,8 @@ import { personType } from '../types/personType';
 import { apiURL } from '../constants/apiURL';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { deletePerson, setCurrentPersonID } from '../reducers/peopleReducer';
-import axios from 'axios';
 import { formatDate } from '../helpers/formatDate';
+import axios from 'axios';
 
 const Person = ({
   firstName,
@@ -16,7 +16,9 @@ const Person = ({
 }: personType) => {
   const dispatch = useAppDispatch();
 
-  const deletePersonHandler = async (id: string) => {
+  const deletePersonHandler = async (id: string | undefined) => {
+    if (!id) return;
+
     await axios.delete(`${apiURL}/${_id}`);
 
     dispatch(deletePerson(id));
@@ -39,10 +41,7 @@ const Person = ({
         >
           Edit
         </button>
-        <button
-          className='btn btn-delete'
-          onClick={() => deletePersonHandler(_id as string)}
-        >
+        <button className='btn btn-delete' onClick={() => deletePersonHandler(_id)}>
           Delete
         </button>
       </div>

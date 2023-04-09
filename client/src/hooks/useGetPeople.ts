@@ -1,6 +1,6 @@
 import { useAppSelector } from './useAppSelector';
 
-export const useGetPeople = () => {
+export const useGetPeopleData = () => {
   const peopleSTATE = useAppSelector((state) => state.peopleReducer.peopleSTATE);
   const currentPersonID = useAppSelector((state) => state.peopleReducer.currentPersonID);
   const loading = useAppSelector((state) => state.peopleReducer.loading);

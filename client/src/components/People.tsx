@@ -1,16 +1,15 @@
 import React from 'react';
-
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { editPersonInfo, finishEditing } from '../reducers/peopleReducer';
+import { useGetPeopleData } from '../hooks/useGetPeople';
 import { personType } from '../types/personType';
 import { apiURL } from '../constants/apiURL';
 import EditForm from './EditForm';
 import Person from './Person';
 import axios from 'axios';
-import { useGetPeople } from '../hooks/useGetPeople';
 
 const People = () => {
-  const { peopleSTATE, currentPersonID } = useGetPeople();
+  const { peopleSTATE, currentPersonID } = useGetPeopleData();
   const dispatch = useAppDispatch();
 
   const editPropsHandler = (

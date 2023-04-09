@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { apiURL } from '../constants/apiURL';
+import axios from 'axios';
 
 export const getAllPeople = createAsyncThunk(apiURL, async (_, { rejectWithValue }) => {
   try {
