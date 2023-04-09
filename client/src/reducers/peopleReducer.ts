@@ -51,7 +51,7 @@ const peopleSlice = createSlice({
   },
 
   extraReducers: (bulider) => {
-    bulider.addCase(getAllPeople.pending, (state, action) => {
+    bulider.addCase(getAllPeople.pending, (state, _) => {
       state.loading = true;
     });
 
