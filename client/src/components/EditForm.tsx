@@ -1,3 +1,5 @@
+import { useAppDispatch } from '../hooks/useAppDispatch';
+import { finishEditing } from '../reducers/peopleReducer';
 import { editFormType } from '../types/formTypes';
 
 const EditForm = ({
@@ -11,33 +13,44 @@ const EditForm = ({
   onClickHandler,
   onChangeHandler,
 }: editFormType) => {
+  const formatedDate = new Date(createdDate).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+
+  const dispatch = useAppDispatch();
+
   return (
-    <form>
+    <form className='edit-form'>
       <div className='form-control'>
-        <label>Name</label>
         <input
           name='firstName'
           type='text'
-          required
           value={firstName}
           onChange={(e) => onChangeHandler(_id, e)}
+          required
         />
       </div>
       <div className='form-control'>
-        <label>Last Name</label>
         <input
           name='lastName'
           type='text'
-          required
           value={lastName}
           onChange={(e) => onChangeHandler(_id, e)}
+          required
         />
       </div>
       <div className='form-control'>
-        <label>Age</label>
+        <input
+          name='age'
+          type='number'
+          value={age}
+          onChange={(e) => onChangeHandler(_id, e)}
+          required
+        />
       </div>
       <div className='form-control'>
-        <label>City</label>
         <input
           name='city'
           type='text'
@@ -46,7 +59,6 @@ const EditForm = ({
         />
       </div>
       <div className='form-control'>
-        <label>Adress</label>
         <input
           name='adress'
           type='text'
@@ -54,15 +66,33 @@ const EditForm = ({
           onChange={(e) => onChangeHandler(_id, e)}
         />
       </div>
-      <button
-        className='btn-form'
-        type='submit'
-        onClick={(e) =>
-          onClickHandler(e, { _id, firstName, lastName, age, city, adress, createdDate })
-        }
-      >
-        Finish editing
-      </button>
+      <p className='start-date-fixed'>{formatedDate}</p>
+      <div className='edit-delete-control'>
+        <button
+          className='btn btn-edit'
+          type='submit'
+          onClick={(e) =>
+            onClickHandler(e, {
+              _id,
+              firstName,
+              lastName,
+              age,
+              city,
+              adress,
+              createdDate,
+            })
+          }
+        >
+          Finish
+        </button>
+        <button
+          className='btn btn-delete'
+          type='submit'
+          onClick={() => dispatch(finishEditing())}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };
