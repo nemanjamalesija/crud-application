@@ -14,7 +14,6 @@ export const getAllPeople = createAsyncThunk<personType[]>(
         },
       } = response;
 
-      console.log(response);
       return people;
     } catch (error: any) {
       rejectWithValue(error.message);
