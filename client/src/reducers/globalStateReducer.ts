@@ -6,7 +6,7 @@ const globalStateSlice = createSlice({
   initialState: generalState,
   reducers: {
     toggleForm: (state) => {
-      return { ...state, showMainForm: !state.showMainForm };
+      state.showMainForm = !state.showMainForm;
     },
   },
 });

@@ -8,17 +8,13 @@ const peopleSlice = createSlice({
   initialState: people,
   reducers: {
     addNewPerson: (state, action: PayloadAction<personType>) => {
-      const { payload: newPerson } = action;
-
-      return { ...state, peopleSTATE: [...state.peopleSTATE, newPerson] };
+      state.peopleSTATE.push(action.payload);
     },
 
     deletePerson: (state, action: PayloadAction<string>) => {
-      const { payload: clickedPersonID } = action;
+      const newPeople = state.peopleSTATE.filter((p) => p._id !== action.payload);
 
-      const newPeople = state.peopleSTATE.filter((p) => p._id !== clickedPersonID);
-
-      return { ...state, peopleSTATE: newPeople };
+      state.peopleSTATE = newPeople;
     },
 
     editPersonInfo: (
@@ -38,19 +34,19 @@ const peopleSlice = createSlice({
         else return p;
       });
 
-      return { ...state, peopleSTATE: newPeople };
+      state.peopleSTATE = newPeople;
     },
 
     setCurrentPersonID: (state, action: PayloadAction<string | undefined>) => {
       const { payload: id } = action;
 
-      if (!id) return { ...state, currentPersonID: nanoid() };
+      if (!id) state.currentPersonID = nanoid();
 
-      return { ...state, currentPersonID: id };
+      state.currentPersonID = action.payload;
     },
 
     finishEditing: (state) => {
-      return { ...state, currentPersonID: undefined };
+      state.currentPersonID = undefined;
     },
   },
 

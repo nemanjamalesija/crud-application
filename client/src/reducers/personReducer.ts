@@ -1,5 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { person } from '../states/personState';
+import { Draft } from '@reduxjs/toolkit';
+import { personType } from '../types/personType';
+import produce from 'immer';
 
 const personSlice = createSlice({
   name: 'person',
@@ -13,11 +16,13 @@ const personSlice = createSlice({
 
       const { key, value } = payload;
 
-      return { ...state, [key]: value };
+      return produce(state, (draft: Draft<personType>) => {
+        draft[key] = value;
+      });
     },
 
     resetPersonState: (state) => {
-      return {
+      state = {
         firstName: '',
         lastName: '',
         age: 18,
