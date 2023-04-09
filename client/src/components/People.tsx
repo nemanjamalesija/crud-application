@@ -4,9 +4,9 @@ import { useAppDispatch } from '../hooks/useAppDispatch';
 import { editPersonInfo, finishEditing } from '../reducers/peopleReducer';
 import { personType } from '../types/personType';
 import { apiURL } from '../constants/apiURL';
-import axios from 'axios';
 import EditForm from './EditForm';
 import Person from './Person';
+import axios from 'axios';
 
 const People = () => {
   const { peopleSTATE, currentPersonID } = useAppSelector((state) => state.peopleReducer);

@@ -5,9 +5,9 @@ import { apiURL } from '../constants/apiURL';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { addNewPerson } from '../reducers/peopleReducer';
-import axios from 'axios';
 import { toggleForm } from '../reducers/globalStateReducer';
 import { resetPersonState } from '../reducers/personReducer';
+import axios from 'axios';
 
 const Form = ({ onChangeHandler }: formType) => {
   const { firstName, lastName, age, city, adress, createdDate } = useAppSelector(

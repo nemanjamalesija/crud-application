@@ -38,7 +38,6 @@ const getSinglePersonHandler = async (req: Request, res: Response) => {
 const postPersonHandler = async (req: Request, res: Response) => {
   try {
     const newPerson = await Person.create(req.body);
-    console.log(newPerson);
     return res.status(200).json({
       status: 'success',
       data: { newPerson },
@@ -85,4 +84,10 @@ const deletePersonHandler = async (req: Request, res: Response) => {
   }
 };
 
-export { getPeopleHandler, postPersonHandler, getSinglePersonHandler, deletePersonHandler, updatePersonHandler };
+export {
+  getPeopleHandler,
+  postPersonHandler,
+  getSinglePersonHandler,
+  deletePersonHandler,
+  updatePersonHandler,
+};

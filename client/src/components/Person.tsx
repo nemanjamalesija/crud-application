@@ -3,6 +3,7 @@ import { apiURL } from '../constants/apiURL';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { deletePerson, setCurrentPersonID } from '../reducers/peopleReducer';
 import axios from 'axios';
+import { formatDate } from '../helpers/formatDate';
 
 const Person = ({
   firstName,
@@ -21,12 +22,6 @@ const Person = ({
     dispatch(deletePerson(id));
   };
 
-  const formatedDate = new Date(createdDate).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-
   return (
     <article className='person-article'>
       <p className='person-info'>{firstName}</p>
@@ -36,7 +31,7 @@ const Person = ({
       <address className='person-info'>
         <p className='person-info'>{adress}</p>
       </address>
-      <p className='person-info'>{formatedDate}</p>
+      <p className='person-info'>{formatDate(createdDate)}</p>
       <div className='edit-delete-control'>
         <button
           className='btn btn-edit'

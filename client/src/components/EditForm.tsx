@@ -1,3 +1,4 @@
+import { formatDate } from '../helpers/formatDate';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { finishEditing } from '../reducers/peopleReducer';
 import { editFormType } from '../types/formTypes';
@@ -13,12 +14,6 @@ const EditForm = ({
   onClickHandler,
   onChangeHandler,
 }: editFormType) => {
-  const formatedDate = new Date(createdDate).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-
   const dispatch = useAppDispatch();
 
   return (
@@ -66,7 +61,7 @@ const EditForm = ({
           onChange={(e) => onChangeHandler(_id, e)}
         />
       </div>
-      <p className='start-date-fixed'>{formatedDate}</p>
+      <p className='start-date-fixed'>{formatDate(createdDate)}</p>
       <div className='edit-delete-control'>
         <button
           className='btn btn-edit'
