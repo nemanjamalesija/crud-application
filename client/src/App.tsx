@@ -6,10 +6,11 @@ import { storePersonInfo } from './reducers/personReducer';
 import Form from './components/Form';
 import Header from './components/Header';
 import People from './components/People';
+import { useGetPeople } from './hooks/useGetPeople';
 
 function App() {
   const { showMainForm } = useAppSelector((state) => state.globalStateReducer);
-  const { loading, error } = useAppSelector((state) => state.peopleReducer);
+  const { loading, error } = useGetPeople();
   const dispatch = useAppDispatch();
 
   const storeNewPersonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {

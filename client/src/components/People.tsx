@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../hooks/useAppSelector';
+
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { editPersonInfo, finishEditing } from '../reducers/peopleReducer';
 import { personType } from '../types/personType';
@@ -7,9 +7,10 @@ import { apiURL } from '../constants/apiURL';
 import EditForm from './EditForm';
 import Person from './Person';
 import axios from 'axios';
+import { useGetPeople } from '../hooks/useGetPeople';
 
 const People = () => {
-  const { peopleSTATE, currentPersonID } = useAppSelector((state) => state.peopleReducer);
+  const { peopleSTATE, currentPersonID } = useGetPeople();
   const dispatch = useAppDispatch();
 
   const editPropsHandler = (

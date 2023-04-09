@@ -16,7 +16,7 @@ export const getAllPeople = createAsyncThunk(apiURL, async (_, { rejectWithValue
     console.log(response);
     return people;
   } catch (error: any) {
-    return rejectWithValue(error.message);
+    rejectWithValue(error.message);
   }
 });
 
