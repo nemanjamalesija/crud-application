@@ -6,5 +6,4 @@ export type personType = {
   createdDate: string;
   city: string;
   adress: string;
-  [key: string]: string | number | undefined;
 };
