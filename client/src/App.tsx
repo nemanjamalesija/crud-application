@@ -13,20 +13,12 @@ function App() {
   const { loading, error } = useGetPeopleData();
   const dispatch = useAppDispatch();
 
-  const storeNewPersonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const key = e.currentTarget.name;
-    const value = e.currentTarget.value;
-
-    dispatch(storePersonInfo({ key, value }));
-  };
-
   if (loading) return <h1>Loading...</h1>;
 
   if (error) return <h1>`Sorry, there has been an error: ${error}`</h1>;
 
   return (
     <div className='app'>
-      <Form onChangeHandler={storeNewPersonHandler} />
       <Header />
       <Categories />
       <People />
