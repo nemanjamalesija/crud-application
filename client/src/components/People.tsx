@@ -1,12 +1,11 @@
-import React from 'react';
-import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useGetPeopleData } from '../hooks/useGetPeople';
-import { storePersonInfo } from '../reducers/personReducer';
 import EditForm from './EditForm';
 import Person from './Person';
 
 const People = () => {
   const { peopleSTATE, currentPersonID } = useGetPeopleData();
+
+  console.log(peopleSTATE);
 
   return (
     <div className='people-container'>

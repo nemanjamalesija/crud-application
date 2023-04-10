@@ -1,20 +1,25 @@
 import React from 'react';
 import { personType } from '../types/personType';
-import { formType } from '../types/formTypes';
 import { apiURL } from '../constants/apiURL';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { addNewPerson } from '../reducers/peopleReducer';
 import { toggleForm } from '../reducers/globalStateReducer';
-import { resetPersonState } from '../reducers/personReducer';
+import { resetPersonState, storePersonInfo } from '../reducers/personReducer';
+import { useGetPersonData } from '../hooks/useGetPersonData';
 import axios from 'axios';
 
-const Form = ({ onChangeHandler }: formType) => {
-  const { firstName, lastName, age, city, adress, createdDate } = useAppSelector(
-    (state) => state.personReducer
-  );
+const Form = () => {
+  const { firstName, lastName, age, city, adress, createdDate } = useGetPersonData();
   const { showMainForm } = useAppSelector((state) => state.globalStateReducer);
   const dispatch = useAppDispatch();
+
+  const storeNewPersonHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const key = e.currentTarget.name;
+    const value = e.currentTarget.value;
+
+    dispatch(storePersonInfo({ key, value }));
+  };
 
   const createNewPersonHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -52,7 +57,7 @@ const Form = ({ onChangeHandler }: formType) => {
           required
           value={firstName}
           placeholder='John'
-          onChange={onChangeHandler}
+          onChange={storeNewPersonHandler}
         />
       </div>
       <div className='form-control'>
@@ -63,7 +68,7 @@ const Form = ({ onChangeHandler }: formType) => {
           required
           value={lastName}
           placeholder='Doe'
-          onChange={onChangeHandler}
+          onChange={storeNewPersonHandler}
         />
       </div>
       <div className='form-control'>
@@ -75,7 +80,7 @@ const Form = ({ onChangeHandler }: formType) => {
           min={18}
           max={65}
           value={age}
-          onChange={onChangeHandler}
+          onChange={storeNewPersonHandler}
         />
       </div>
       <div className='form-control'>
@@ -85,7 +90,7 @@ const Form = ({ onChangeHandler }: formType) => {
           type='text'
           value={city}
           placeholder='New Orleans'
-          onChange={onChangeHandler}
+          onChange={storeNewPersonHandler}
         />
       </div>
       <div className='form-control'>
@@ -95,7 +100,7 @@ const Form = ({ onChangeHandler }: formType) => {
           type='text'
           value={adress}
           placeholder='1 My Place 81000'
-          onChange={onChangeHandler}
+          onChange={storeNewPersonHandler}
         />
       </div>
       <button

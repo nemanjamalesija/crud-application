@@ -107,13 +107,6 @@ const EditForm = ({
         >
           Finish
         </button>
-        <button
-          className='btn btn-delete'
-          type='submit'
-          onClick={() => dispatch(finishEditing())}
-        >
-          Cancel
-        </button>
       </div>
     </form>
   );
