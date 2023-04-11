@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { personType } from '../types/personType';
 import { apiURL } from '../constants/apiURL';
 import { useAppSelector } from '../hooks/useAppSelector';

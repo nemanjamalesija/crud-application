@@ -3,6 +3,7 @@ import { useAppSelector } from '../hooks/useAppSelector';
 import { useGetPeopleData } from '../hooks/useGetPeople';
 import { toggleForm } from '../reducers/globalStateReducer';
 import EditForm from './EditForm';
+import Form from './Form';
 import Person from './Person';
 
 const People = () => {
@@ -24,6 +25,7 @@ const People = () => {
           <Person key={person._id} {...person} />
         );
       })}
+      <Form />
       <div
         className={`${showMainForm ? 'overlay' : 'overlay hidden'}`}
         onClick={() => dispatch(toggleForm())}

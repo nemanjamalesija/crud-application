@@ -4,6 +4,7 @@ import { useAppDispatch } from '../hooks/useAppDispatch';
 import { deletePerson, setCurrentPersonID } from '../reducers/peopleReducer';
 import { formatDate } from '../helpers/formatDate';
 import axios from 'axios';
+import { memo } from 'react';
 
 const Person = ({
   firstName,
@@ -49,4 +50,4 @@ const Person = ({
   );
 };
 
-export default Person;
+export default memo(Person);
